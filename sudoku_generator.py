@@ -5,7 +5,7 @@ This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by 
 https://www.geeksforgeeks.org/program-sudoku-generator/
 
 """
-
+import math
 class SudokuGenerator:
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
@@ -23,7 +23,10 @@ class SudokuGenerator:
 	None
     '''
     def __init__(self, row_length, removed_cells):
-        pass
+        self.row_length = row_length
+        self.removed_cells = removed_cells
+        self.board = [[0 for _ in range(9)] for _ in range (9)]
+        self.box_length = math.sqrt(self.row_length)
 
     '''
 	Returns a 2D python list of numbers which represents the board
