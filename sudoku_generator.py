@@ -115,7 +115,25 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def is_valid(self, row, col, num):
-        pass
+
+        # Creates row_start and col_start variables for the valid_in_box function to work.
+        if row < 3:
+            row_start = 0
+        elif row < 6:
+            row_start = 3
+        else:
+            row_start = 6
+
+        if col < 3:
+            col_start = 0
+        elif col < 6:
+            col_start = 3
+        else:
+            col_start = 6
+
+        if self.valid_in_box(row_start, col_start, num) == False or self.valid_in_col(col, num) == False or self.valid_in_row(row, num) == False:
+            return False
+        return True
 
     '''
     Fills the specified 3x3 box with values
