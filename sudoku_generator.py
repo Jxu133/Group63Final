@@ -6,6 +6,7 @@ https://www.geeksforgeeks.org/program-sudoku-generator/
 
 """
 import math
+import random
 class SudokuGenerator:
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
@@ -146,7 +147,12 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
-        pass
+        values = random.sample(range(1,10),9)
+        index = 0
+        for row in range(3):
+            for col in range(3):
+                self.board[row_start+row][col] = values[index]
+                index += 1
     
     '''
     Fills the three boxes along the main diagonal of the board
