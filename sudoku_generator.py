@@ -25,7 +25,7 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        self.board = [[0 for _ in range(9)] for _ in range (9)]
+        self.board = [[0 for _ in range(9)] for _ in range(9)]
         self.box_length = math.sqrt(self.row_length)
 
     '''
@@ -51,7 +51,7 @@ class SudokuGenerator:
                 if number != 0:
                     displayed_row.append(str(number))
                 else:
-                    displayed_row.append(" ")
+                    displayed_row.append("_")
             print(" ".join(displayed_row))
 
     '''
