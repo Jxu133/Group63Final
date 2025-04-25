@@ -151,7 +151,7 @@ class SudokuGenerator:
         index = 0
         for row in range(3):
             for col in range(3):
-                self.board[row_start+row][col] = values[index]
+                self.board[row_start+row][col_start+col] = values[index]
                 index += 1
     
     '''
@@ -162,7 +162,9 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_diagonal(self):
-        pass
+        self.fill_box(0,0)
+        self.fill_box(3,3)
+        self.fill_box(6,6)
 
     '''
     DO NOT CHANGE
