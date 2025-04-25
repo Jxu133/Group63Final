@@ -35,7 +35,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
-        pass
+        return self.board
 
     '''
 	Displays the board to the console
@@ -45,7 +45,14 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        pass
+        for r in self.board:
+            displayed_row = []
+            for number in r:
+                if number != 0:
+                    displayed_row.append(str(number))
+                else:
+                    displayed_row.append(" ")
+            print(" ".join(displayed_row))
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -58,8 +65,10 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        pass
-
+        for column in range(self.row_length):
+            if self.board[row][column]==num:
+                return False
+        return True
     '''
 	Determines if num is contained in the specified column (vertical) of the board
     If num is already in the specified col, return False. Otherwise, return True
