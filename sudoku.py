@@ -28,6 +28,7 @@ def main():
     win_screen = 2
     lose_screen = 3
     current_screen = start_screen
+    current_screen = lose_screen
 
     board = None #this will be created when a difficulty is chosen
 
@@ -40,6 +41,9 @@ def main():
     reset_rect = pygame.Rect(50, window_width + 30, 150, 50)
     restart_rect = pygame.Rect(250, window_width + 30, 200, 50)
     quit_rect = pygame.Rect(525, window_width +30 , 150, 50)
+
+    #end screen rect
+    end_rect = pygame.Rect(window_width//2 - 100, 500, 200, 60)
 
     while True:
         for event in pygame.event.get():
@@ -144,26 +148,26 @@ def main():
             win_text = Title_font.render("Victory! good job :3", True, black)
             screen.blit(win_text, (window_width // 2 - win_text.get_width() // 2, 150))
 
-            #exit button (i am using the positional variables for the hard button because im EVIL)
-            pygame.draw.rect(screen, black, hard_rect, 3)
+            #exit button
+            pygame.draw.rect(screen, black, end_rect, 3)
             exit_text = font.render("EXIT", True, black)
-            screen.blit(exit_text, (hard_rect.centerx - exit_text.get_width() // 2,
-                                             hard_rect.centery - exit_text.get_height() // 2))
+            screen.blit(exit_text, (end_rect.centerx - exit_text.get_width() // 2,
+                                             end_rect.centery - exit_text.get_height() // 2))
 
         elif current_screen == lose_screen:
             # renders background image
             image = pygame.image.load('images/loss.jpg').convert()
             screen.blit(image, (0, 0))
 
-            # renders win text
+            # renders loss text
             loss_text = Title_font.render("Game over (╥ ω ╥)", True, black)
             screen.blit(loss_text, (window_width // 2 - loss_text.get_width() // 2, 150))
 
-            # restart button (i am using the positional variables for the hard button because im EVIL)
-            pygame.draw.rect(screen, black, hard_rect, 3)
+            # restart button
+            pygame.draw.rect(screen, black, end_rect, 3)
             restart_text = font.render("RESTART", True, black)
-            screen.blit(restart_text, (hard_rect.centerx - restart_text.get_width() // 2,
-                                    hard_rect.centery - restart_text.get_height() // 2))
+            screen.blit(restart_text, (end_rect.centerx - restart_text.get_width() // 2,
+                                    end_rect.centery - restart_text.get_height() // 2))
 
 
 
