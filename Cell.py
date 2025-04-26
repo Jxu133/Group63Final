@@ -1,5 +1,4 @@
 import pygame
-import Board
 
 pygame.init()
 
@@ -19,9 +18,6 @@ class Cell:
 
     def draw(self):
         if self.value != 0:
-            number_font = pygame.font.Font(pygame.font.get_default_font(), 10)
+            number_font = pygame.font.Font("Arial", 10)
             number_text = number_font.render(f"{self.value}", True, "black")
-
-        else:
-            pass
 
