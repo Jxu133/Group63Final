@@ -35,12 +35,28 @@ def main():
     hard_rect = pygame.Rect(window_width//2 - 100, 500, 200, 60)
 
     while True:
-        screen.fill(black)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+            if current_screen == start_screen:
+                if event.type == pygame.MOUSEBUTTONDOWN: #checks which difficulty is chosen
+                    if easy_rect.collidepoint(event.pos):
+                        board = Board(window_width,window_height,screen,'easy')
+                        current_screen = game_screen
+                    elif medium_rect.collidepoint(event.pos):
+                        board = Board(window_width, window_height, screen, 'medium')
+                        current_screen = game_screen
+                    elif hard_rect.collidepoint(event.pos):
+                        board =  Board(window_width, window_height, screen, 'hard')
+                        current_screen = game_screen
+            # elif current_screen == game_screen:
+            #     if event.type == pygame.MOUSEBUTTONDOWN:
+            #         position = board.click ()
+
         #renders start screen
+        screen.fill(white)
         if current_screen == start_screen:
             #renders background image
             image = pygame.image.load('sudoku_bg.jpg').convert()
@@ -63,15 +79,19 @@ def main():
             pygame.draw.rect(screen,black,medium_rect, 0)
             pygame.draw.rect(screen, yellow, medium_rect, 2)
             medium_option_text = font.render("MEDIUM", True, yellow)
-            screen.blit(medium_option_text, (medium_rect.centerx - medium_option_text.get_width() // 2,
-                                             medium_rect.centery - medium_option_text.get_height() // 2))
+            screen.blit(medium_option_text, (medium_rect.centerx - medium_option_text.get_width() // 2, medium_rect.centery - medium_option_text.get_height() // 2))
+
             #hard
             pygame.draw.rect(screen,black,hard_rect,0)
             pygame.draw.rect(screen, red, hard_rect, 2)
             hard_option_text = font.render("HARD", True, red)
-            screen.blit(hard_option_text, (hard_rect.centerx - hard_option_text.get_width() // 2,
-                                           hard_rect.centery - hard_option_text.get_height() // 2))
+            screen.blit(hard_option_text, (hard_rect.centerx - hard_option_text.get_width() // 2, hard_rect.centery - hard_option_text.get_height() // 2))
 
+        elif current_screen == game_screen:
+            board.draw()
+
+        elif current_screen == win_screen:
+            win_text = Title_font.render("Congratulations smarty pants! You Won!!!", True, green)
 
 
 
