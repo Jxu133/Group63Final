@@ -8,7 +8,7 @@ pygame.init()
 
 def main():
     #variable declarations:
-    window_width = 900
+    window_width = 700
     window_height = 900
     grid_size = 9
     white = (255, 255, 255)
