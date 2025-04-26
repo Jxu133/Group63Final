@@ -1,6 +1,6 @@
-# import pygame
+import pygame
 # from Cell import cell
-# from sudoku_generator import sudoku_maker
+# from sudoku_generator import generate_sudoku
 
 class Board:
     def __init__(self, width, height, screen, difficulty):
@@ -11,7 +11,19 @@ class Board:
         self.selected_cell= None
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
-        pass
+        for i in range(10):
+            if i%3 == 0:
+                board_line_width = 3
+            else:
+                board_line_width = 1
+            y_pos = i * self.height//9
+            x_pos = i * self.width//9
+            # draws horizontal line
+            pygame.draw.line(self.screen, (0,0,0), (0, y_pos),(self.width, y_pos),board_line_width)
+            #draws vertical line/
+            pygame.draw.line(self.screen, (0,0,0), (x_pos,0),(x_pos,self.height),board_line_width)
+
+
 
     #marks cell at row, col in board as selected cell. Once a cell has been selected, user can edit its value or
     #sketched value
