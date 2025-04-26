@@ -42,23 +42,31 @@ def main():
                 sys.exit()
         #renders start screen
         if current_screen == start_screen:
+            #renders background image
+            image = pygame.image.load('sudoku_bg.jpg').convert()
+            screen.blit(image, (0, 0))
+
+
             #renders title text
-            title = Title_font.render("UF SUDOKU!", True, white)
+            title = Title_font.render("UF SUDOKU!", True, black)
             screen.blit(title, (window_width // 2 - title.get_width() // 2, 150))
 
 
             #easy button
+            pygame.draw.rect(screen, black, easy_rect, 0)
             pygame.draw.rect(screen, green, easy_rect, 2)
             easy_option_text = font.render("EASY", True, green)
             screen.blit(easy_option_text, (easy_rect.centerx - easy_option_text.get_width() // 2,
                                            easy_rect.centery - easy_option_text.get_height() // 2))
 
             #medium button
+            pygame.draw.rect(screen,black,medium_rect, 0)
             pygame.draw.rect(screen, yellow, medium_rect, 2)
             medium_option_text = font.render("MEDIUM", True, yellow)
             screen.blit(medium_option_text, (medium_rect.centerx - medium_option_text.get_width() // 2,
                                              medium_rect.centery - medium_option_text.get_height() // 2))
             #hard
+            pygame.draw.rect(screen,black,hard_rect,0)
             pygame.draw.rect(screen, red, hard_rect, 2)
             hard_option_text = font.render("HARD", True, red)
             screen.blit(hard_option_text, (hard_rect.centerx - hard_option_text.get_width() // 2,
