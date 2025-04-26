@@ -19,7 +19,7 @@ class Cell:
     def draw(self):
         if self.value != 0:
             number_font = pygame.font.SysFont("Arial", 10)
-            number_text = number_font.render(f"{self.value}", True, "black")
+            number_text = number_font.render(f"{self.value}", True, grey)
             self.screen.blit(number_text, (self.row,self.col))
 
 
