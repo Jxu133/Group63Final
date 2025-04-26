@@ -28,6 +28,7 @@ def main():
     win_screen = 2
     lose_screen = 3
     current_screen = start_screen
+
     board = None #this will be created when a difficulty is chosen
 
     #starting board rects
@@ -63,11 +64,22 @@ def main():
 
                     print()
 
+            elif current_screen == win_screen:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if hard_rect.collidepoint(event.pos):
+                        pygame.quit()
+                        sys.exit()
+
+            elif current_screen == lose_screen:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if hard_rect.collidepoint(event.pos):
+                        current_screen = start_screen
+
         #renders start screen
         screen.fill(white)
         if current_screen == start_screen:
             #renders background image
-            image = pygame.image.load('sudoku_bg.jpg').convert()
+            image = pygame.image.load('images/sudoku_bg.jpg').convert()
             screen.blit(image, (0, 0))
 
 
@@ -116,7 +128,34 @@ def main():
                                    quit_text.get_height()//2))
 
         elif current_screen == win_screen:
-            win_text = Title_font.render("Congratulations smarty pants! You Won!!!", True, green)
+            # renders background image
+            image = pygame.image.load('images/victory.jpg').convert()
+            screen.blit(image, (0, 0))
+
+            #renders win text
+            win_text = Title_font.render("Victory! good job :3", True, black)
+            screen.blit(win_text, (window_width // 2 - win_text.get_width() // 2, 150))
+
+            #exit button (i am using the positional variables for the hard button because im EVIL)
+            pygame.draw.rect(screen, black, hard_rect, 3)
+            exit_text = font.render("EXIT", True, black)
+            screen.blit(exit_text, (hard_rect.centerx - exit_text.get_width() // 2,
+                                             hard_rect.centery - exit_text.get_height() // 2))
+
+        elif current_screen == lose_screen:
+            # renders background image
+            image = pygame.image.load('images/loss.jpg').convert()
+            screen.blit(image, (0, 0))
+
+            # renders win text
+            loss_text = Title_font.render("Game over (╥ ω ╥)", True, black)
+            screen.blit(loss_text, (window_width // 2 - loss_text.get_width() // 2, 150))
+
+            # restart button (i am using the positional variables for the hard button because im EVIL)
+            pygame.draw.rect(screen, black, hard_rect, 3)
+            restart_text = font.render("RESTART", True, black)
+            screen.blit(restart_text, (hard_rect.centerx - restart_text.get_width() // 2,
+                                    hard_rect.centery - restart_text.get_height() // 2))
 
 
 
