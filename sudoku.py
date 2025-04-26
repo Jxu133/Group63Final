@@ -51,7 +51,9 @@ def main():
                     elif hard_rect.collidepoint(event.pos):
                         board =  Board(window_width, window_height, screen, 'hard')
                         current_screen = game_screen
-
+            # elif current_screen == game_screen:
+            #     if event.type == pygame.MOUSEBUTTONDOWN:
+            #         position = board.click ()
 
         #renders start screen
         screen.fill(white)
