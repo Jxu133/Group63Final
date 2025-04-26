@@ -1,7 +1,7 @@
 import pygame
 
 pygame.init()
-
+black = (0, 0, 0)
 class Cell:
     def __init__(self, value, row, col, screen):
         self.value = value
@@ -18,8 +18,8 @@ class Cell:
 
     def draw(self):
         if self.value != 0:
-            number_font = pygame.font.SysFont("Arial", 10)
-            number_text = number_font.render(f"{self.value}", True, grey)
-            self.screen.blit(number_text, (self.row,self.col))
+            number_font = pygame.font.SysFont("Arial", 40)
+            number_text = number_font.render(f"{self.value}", True, black)
+            self.screen.blit(number_text, ((self.row) * 78 +30,(self.col) * 78 + 20))
 
 

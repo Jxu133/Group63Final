@@ -27,13 +27,13 @@ class Board:
                 self.cells[row][col] = Cell(values[row][col], row, col, screen)
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
-        gap = self.board_size // 9
+        gap = 78
         for i in range(10):
             if i % 3 == 0:
                 board_line_width = 3
             else:
                 board_line_width = 1
-            y_pos = i * gap
+            y_pos = i * gap + 1
             x_pos = i * gap
             pygame.draw.line(self.screen, (0, 0, 0), (0, y_pos), (self.board_size, y_pos), board_line_width)
             pygame.draw.line(self.screen, (0, 0, 0), (x_pos, 0), (x_pos, self.board_size), board_line_width)

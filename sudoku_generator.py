@@ -241,7 +241,7 @@ class SudokuGenerator:
 
 
 
-'''
+''' 
 DO NOT CHANGE
 Provided for students
 Given a number of rows and number of cells to remove, this function:
@@ -264,4 +264,5 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
+
 
