@@ -9,6 +9,10 @@ class Board:
         self.screen = screen
         self.difficulty = difficulty
         self.selected_cell= None
+
+        #makes placeholder 9x9 board
+        self.cells = [[None for _ in range(9)] for _ in range(9)]
+        self.board = [[0 for _ in range(9)] for _ in range(9)]
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
         for i in range(10):
