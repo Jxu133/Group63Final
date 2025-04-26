@@ -28,7 +28,6 @@ def main():
     win_screen = 2
     lose_screen = 3
     current_screen = start_screen
-    current_screen = lose_screen
 
     board = None #this will be created when a difficulty is chosen
 
@@ -167,7 +166,7 @@ def main():
             # restart button
             pygame.draw.rect(screen, black, end_rect, 3)
             restart_text = font.render("RESTART", True, black)
-            screen.blit(restart_text, (end_rect.centerx - restart_text.get_width() // 2,
+            screen.blit(restart_text, (end_rect.centerx - restart_text.get_width    () // 2,
                                     end_rect.centery - restart_text.get_height() // 2))
 
 
