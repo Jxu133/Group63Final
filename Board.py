@@ -12,9 +12,19 @@ class Board:
         self.selected_cell= None
         self.board_size = min(width, height - 200)
 
-        #makes placeholder 9x9 board
+        #fills board
         self.cells = [[None for _ in range(9)] for _ in range(9)]
         self.board = [[0 for _ in range(9)] for _ in range(9)]
+        if self.difficulty == 'easy':
+            values = generate_sudoku(9,30)
+        elif self.difficulty == 'medium':
+            values = generate_sudoku(9,40)
+        elif self.difficulty == 'hard':
+            values = generate_sudoku(9,50)
+        self.board = values
+        for row in range(9):
+            for col in range(9):
+                self.cells[row][col] = Cell(values[row][col], row, col, screen)
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
         gap = self.board_size // 9
@@ -27,6 +37,9 @@ class Board:
             x_pos = i * gap
             pygame.draw.line(self.screen, (0, 0, 0), (0, y_pos), (self.board_size, y_pos), board_line_width)
             pygame.draw.line(self.screen, (0, 0, 0), (x_pos, 0), (x_pos, self.board_size), board_line_width)
+        for row in range(9):
+            for col in range(9):
+                self.cells[row][col].draw()
 
 
     #marks cell at row, col in board as selected cell. Once a cell has been selected, user can edit its value or
