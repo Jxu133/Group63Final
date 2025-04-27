@@ -16,7 +16,6 @@ def main():
     yellow =(255, 255, 0)
     red = (255, 0, 0)
     black = (0, 0, 0)
-    blue = (110, 193, 248)
     Title_font = pygame.font.SysFont("Times New Roman", 72)
     font = pygame.font.SysFont("Arial", 36)
 
@@ -88,6 +87,8 @@ def main():
                                 col += 1
                                 board.select(row, col)
                         selection_rect.update(col * 78, row * 78+1, 78, 78)
+                    elif event.key == 13:
+                        board.place_number(board.cells[row][col].sketched_value)
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if reset_rect.collidepoint(event.pos):
                         board.reset_to_original()
@@ -153,8 +154,13 @@ def main():
 
         elif current_screen == game_screen:
             board.draw()
+            if board.is_full():
+                if board.check_board():
+                    current_screen = win_screen
+                else:
+                    current_screen = lose_screen
 
-            pygame.draw.rect(screen, blue, selection_rect, 4)
+            pygame.draw.rect(screen, red, selection_rect, 4)
 
             pygame.draw.rect(screen, yellow, reset_rect)
             reset_text = font.render("RESET", True, black)

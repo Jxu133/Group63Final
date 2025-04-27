@@ -13,21 +13,21 @@ class Board:
         self.board_size = min(width, height - 200)
 
         #fills board
-        self.cells = [[None for _ in range(9)] for _ in range(9)]
-        self.board = [[0 for _ in range(9)] for _ in range(9)]
+        self.init_cells = [[None for _ in range(9)] for _ in range(9)]
+        self.init_board = [[0 for _ in range(9)] for _ in range(9)]
         if self.difficulty == 'easy':
             values = generate_sudoku(9,30)
         elif self.difficulty == 'medium':
             values = generate_sudoku(9,40)
         elif self.difficulty == 'hard':
             values = generate_sudoku(9,50)
-        self.board = values
+        self.init_board = values
         for row in range(9):
             for col in range(9):
-                self.cells[row][col] = Cell(values[row][col], row, col, screen)
+                self.init_cells[row][col] = Cell(values[row][col], row, col, screen)
 
-        self.init_board = self.board
-        self.init_cells = self.cells
+        self.board = self.init_board
+        self.cells = self.init_cells
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
         gap = 78
@@ -81,8 +81,8 @@ class Board:
     #Called when the user presses the Enter key.
     def place_number(self, value):
         if self.selected_cell:
-            row, col = self.selected_cell
-            if self.cells[row][col] is not None:
+            row, col = self.selected_cell[0], self.selected_cell[1]
+            if self.cells[row][col].value == 0:
                 self.cells[row][col].set_cell_value(value)
                 self.board[row][col] = value
 
