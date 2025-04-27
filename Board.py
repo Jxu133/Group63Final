@@ -65,7 +65,7 @@ class Board:
     #Clears cell value. NOTE: Users can only remove cell/sketched values made THEMSELVES
     def clear(self):
         if self.selected_cell:
-            row, col = self.selected_cell
+            row, col = self.selected_cell[0],self.selected_cell[1]
             if self.board[row][col] == 0 and self.cells[row][col] is not None:
                 self.cells[row][col].set_sketched_value(0)
 

@@ -89,6 +89,8 @@ def main():
                         selection_rect.update(col * 78, row * 78+1, 78, 78)
                     elif event.key == 13:
                         board.place_number(board.cells[row][col].sketched_value)
+                    elif event.key == 8:
+                        board.clear()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if reset_rect.collidepoint(event.pos):
                         board.reset_to_original()
