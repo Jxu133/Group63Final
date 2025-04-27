@@ -16,6 +16,7 @@ def main():
     yellow =(255, 255, 0)
     red = (255, 0, 0)
     black = (0, 0, 0)
+    blue = (110, 193, 248)
     Title_font = pygame.font.SysFont("Times New Roman", 72)
     font = pygame.font.SysFont("Arial", 36)
 
@@ -40,9 +41,11 @@ def main():
     reset_rect = pygame.Rect(50, window_width + 30, 150, 50)
     restart_rect = pygame.Rect(250, window_width + 30, 200, 50)
     quit_rect = pygame.Rect(525, window_width +30 , 150, 50)
+    selection_rect = pygame.Rect(700, 900, 78, 78)
 
     #end screen rect
     end_rect = pygame.Rect(window_width//2 - 100, 500, 200, 60)
+
 
     while True:
         for event in pygame.event.get():
@@ -63,6 +66,28 @@ def main():
                         current_screen = game_screen
 
             elif current_screen == game_screen:
+                if event.type == pygame.KEYDOWN:
+                    if 47 < event.key <= 57: #cell input
+                        if board.selected_cell:
+                            board.sketch(event.key-48)
+                    if event.key > 1073741902: #arrow key cell selection methods
+                        if event.key == 1073741906:
+                            if row != 0:
+                                row -= 1
+                                board.select(row, col)
+                        if event.key == 1073741905:
+                            if row != 8:
+                                row += 1
+                                board.select(row, col)
+                        if event.key == 1073741904:
+                            if col != 0:
+                                col -= 1
+                                board.select(row, col)
+                        if event.key == 1073741903:
+                            if col != 8:
+                                col += 1
+                                board.select(row, col)
+                        selection_rect.update(col * 78, row * 78+1, 78, 78)
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if reset_rect.collidepoint(event.pos):
                         board.reset_to_original()
@@ -75,6 +100,11 @@ def main():
                         position = board.click(*event.pos)
                         if position:
                             board.select(*position)
+                    if event.pos[1] <= 700:
+                        row,col = event.pos[1]//78,event.pos[0]//78
+                        board.select(row,col)
+                        selection_rect.update(col * 78,row * 78 + 1,78,78)
+
 
             elif current_screen == win_screen:
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -123,6 +153,8 @@ def main():
 
         elif current_screen == game_screen:
             board.draw()
+
+            pygame.draw.rect(screen, blue, selection_rect, 4)
 
             pygame.draw.rect(screen, yellow, reset_rect)
             reset_text = font.render("RESET", True, black)

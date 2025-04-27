@@ -25,6 +25,9 @@ class Board:
         for row in range(9):
             for col in range(9):
                 self.cells[row][col] = Cell(values[row][col], row, col, screen)
+
+        self.init_board = self.board
+        self.init_cells = self.cells
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
         gap = 78
@@ -67,12 +70,12 @@ class Board:
                 self.cells[row][col].set_sketched_value(0)
 
     #Sets the sketched value of the current selected cell equal to the user entered value.
-    #It will be displayed at the top left corner of the cell using the draw() function.
+    #It will be displayed in the top left corner of the cell using the draw() function.
     def sketch(self, value):
         if self.selected_cell:
             row, col = self.selected_cell
             if self.cells[row][col] is not None:
-                self.cells[row][col].set_sketched_value(value)
+                (self.cells[self.selected_cell[0]][self.selected_cell[1]]).set_sketched_value(value)
 
     #Sets the value of the current selected cell equal to the user entered value.
     #Called when the user presses the Enter key.
@@ -86,12 +89,8 @@ class Board:
     #Resets all cells in the board to their original values
     #(0 if cleared, otherwise the corresponding digit).
     def reset_to_original(self):
-        for row in range(9):
-            for col in range(9):
-                if self.cells[row][col] is not None:
-                    self.cells[row][col].set_cell_value(0)
-                    self.cells[row][col].set_sketched_value(0)
-                self.board[row][col] = 0
+        self.cells = self.init_cells
+        self.board = self.init_board
 
     #Returns a Boolean value indicating whether the board is full or not.
     def is_full(self):
