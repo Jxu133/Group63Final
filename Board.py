@@ -13,21 +13,19 @@ class Board:
         self.board_size = min(width, height - 200)
 
         #fills board
-        self.init_cells = [[None for _ in range(9)] for _ in range(9)]
-        self.init_board = [[0 for _ in range(9)] for _ in range(9)]
+        self.cells = [[None for _ in range(9)] for _ in range(9)]
+        self.board = [[0 for _ in range(9)] for _ in range(9)]
         if self.difficulty == 'easy':
             values = generate_sudoku(9,30)
         elif self.difficulty == 'medium':
             values = generate_sudoku(9,40)
         elif self.difficulty == 'hard':
             values = generate_sudoku(9,50)
-        self.init_board = values
+        self.values = values
+        self.board = values
         for row in range(9):
             for col in range(9):
-                self.init_cells[row][col] = Cell(values[row][col], row, col, screen)
-
-        self.board = self.init_board
-        self.cells = self.init_cells
+                self.cells[row][col] = Cell(values[row][col], row, col, screen)
     #Draws Sudoku grid outline with bold lines to differentiate 3x3 boxes. Draws every cell on board
     def draw(self):
         gap = 78
@@ -89,8 +87,11 @@ class Board:
     #Resets all cells in the board to their original values
     #(0 if cleared, otherwise the corresponding digit).
     def reset_to_original(self):
-        self.cells = self.init_cells
-        self.board = self.init_board
+        for row in range(9):
+            for col in range(9):
+                if self.cells[row][col].sketched_value != 0:
+                    self.cells[row][col] = Cell(0,row,col,self.screen)
+                    self.board[row][col] = 0
 
     #Returns a Boolean value indicating whether the board is full or not.
     def is_full(self):
